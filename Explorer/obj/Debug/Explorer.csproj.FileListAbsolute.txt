@@ -1,0 +1,9 @@
+E:\MyWorkSpace\vs2015\Explorer\Explorer\bin\Debug\Explorer.exe.config
+E:\MyWorkSpace\vs2015\Explorer\Explorer\bin\Debug\Explorer.exe
+E:\MyWorkSpace\vs2015\Explorer\Explorer\bin\Debug\Explorer.pdb
+E:\MyWorkSpace\vs2015\Explorer\Explorer\obj\Debug\Explorer.csprojResolveAssemblyReference.cache
+E:\MyWorkSpace\vs2015\Explorer\Explorer\obj\Debug\Explorer.Properties.Resources.resources
+E:\MyWorkSpace\vs2015\Explorer\Explorer\obj\Debug\Explorer.csproj.GenerateResource.Cache
+E:\MyWorkSpace\vs2015\Explorer\Explorer\obj\Debug\Explorer.exe
+E:\MyWorkSpace\vs2015\Explorer\Explorer\obj\Debug\Explorer.pdb
+E:\MyWorkSpace\vs2015\Explorer\Explorer\obj\Debug\Explorer.Form1.resources
