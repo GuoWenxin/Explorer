@@ -22,9 +22,13 @@ namespace Explorer
         private ContextMenuStrip rightMenuStrip;
         private Thread addListViewThread;
         private FolderType currentFolderType=FolderType.COMPUTER;
+
+        ProgressForm progressForm=new ProgressForm();
         public Form1()
         {
             InitializeComponent();
+            //设置改窗体在最顶层
+            progressForm.TopMost = true;
             LogLabel.Text = "初始化中...";
             //申明一个鼠标右键点击菜单
             rightMenuStrip = new ContextMenuStrip();//1
@@ -44,6 +48,10 @@ namespace Explorer
             treeView1.ImageList = SmallImageList;
             treeView1.SelectedImageIndex = (int) ImageFileType.COMPUTER;
             LogLabel.Text = "初始化完成";
+
+
+            progressForm.Show();
+            progressForm.Visible = false;
         }
         private void LoadRootInfo()
         {
@@ -243,6 +251,8 @@ namespace Explorer
         }
         private void AddListItemThread(object fullpath)
         {
+            progressForm.Visible = true;
+            progressForm.SetPosition(Left,Width,Top,Height);
             LogLabel.Text = "加载中...";
             string path = (string)fullpath;
             listView1.Items.Clear();
@@ -257,7 +267,10 @@ namespace Explorer
                 int index = 0;
                 foreach (var directoryInfo in dis)
                 {
-                    LogLabel.Text = string.Format("正在加载{2}  已完成{0}/{1}", index, allfiles, directoryInfo.Name);
+                    string text = string.Format("正在加载{2}  已完成{0}/{1}", index, allfiles, directoryInfo.Name);
+                    LogLabel.Text = text;
+                    progressForm.ShowText(text);
+                    progressForm.ShowProgress(allfiles, index);
                     ListItemInfo listItemInfo = new ListItemInfo {Name = directoryInfo.Name,CrtTm = directoryInfo.CreationTime,ModTm = directoryInfo.LastWriteTime,Type = "文件夹",Size = Util.GetDirectoryLength(directoryInfo.FullName) };
                     AddViewItem(listItemInfo, false);
                     ListViewData.Instance.SetListItemInfo(listItemInfo,InfoType.DIRECTORY);
@@ -266,7 +279,11 @@ namespace Explorer
                 }
                 foreach (var fileInfo in fis)
                 {
-                    LogLabel.Text = string.Format("正在加载{2}  已完成{0}/{1}", index, allfiles, fileInfo.Name);
+                    string text= string.Format("正在加载{2}  已完成{0}/{1}", index, allfiles, fileInfo.Name);
+                    LogLabel.Text = text;
+                    LogLabel.Text = text;
+                    progressForm.ShowText(text);
+                    progressForm.ShowProgress(allfiles, index);
                     ListItemInfo listItemInfo = new ListItemInfo {Name = fileInfo.Name,CrtTm = fileInfo.CreationTime,ModTm = fileInfo.LastWriteTime,Type = fileInfo.Extension.Replace(".", "").ToUpper() + "文件" ,Size = Util.FileSize(fileInfo.FullName) };
                     AddViewItem(listItemInfo);
                     ListViewData.Instance.SetListItemInfo(listItemInfo, InfoType.File);
@@ -279,6 +296,7 @@ namespace Explorer
                 Console.WriteLine(e.Message);
             }
             LogLabel.Text = "加载完成";
+            progressForm.Visible = false;
         }
 
         private void AddViewItem(ListItemInfo listItemInfo,bool isfile=true)
@@ -580,6 +598,14 @@ namespace Explorer
             foreach (var listItemInfo in listViewDatas2)
             {
                 AddViewItem(listItemInfo);
+            }
+        }
+
+        private void Form1_Move(object sender, EventArgs e)
+        {
+            if (progressForm.Visible)
+            {
+                progressForm.SetPosition(Left, Width, Top, Height);
             }
         }
     }

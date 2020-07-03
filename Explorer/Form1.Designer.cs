@@ -104,6 +104,7 @@
             this.Name = "Form1";
             this.Text = "资源管理器";
             this.SizeChanged += new System.EventHandler(this.OnMainFormSizeChangerd);
+            this.Move += new System.EventHandler(this.Form1_Move);
             this.ResumeLayout(false);
 
         }

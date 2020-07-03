@@ -7,3 +7,4 @@ E:\MyWorkSpace\vs2015\Explorer\Explorer\obj\Debug\Explorer.csproj.GenerateResour
 E:\MyWorkSpace\vs2015\Explorer\Explorer\obj\Debug\Explorer.exe
 E:\MyWorkSpace\vs2015\Explorer\Explorer\obj\Debug\Explorer.pdb
 E:\MyWorkSpace\vs2015\Explorer\Explorer\obj\Debug\Explorer.Form1.resources
+E:\MyWorkSpace\vs2015\Explorer\Explorer\obj\Debug\Explorer.ProgressForm.resources
